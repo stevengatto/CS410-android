@@ -2,7 +2,9 @@
 <resources>
 
     <string name="app_name">cs410-android</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Accounts -->
+    <string name="account_type">com.cs410.android</string>
 
 </resources>

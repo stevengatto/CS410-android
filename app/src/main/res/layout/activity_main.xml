@@ -1,6 +1,88 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"/>
+    android:background="#efefef">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="sans-serif-thin"
+                android:gravity="center"
+                android:text="SIGN IN"
+                android:textSize="32sp"
+                android:textStyle="normal|bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/loginbox"
+                android:orientation="vertical"
+                android:paddingLeft="20dp">
+                <EditText
+                    android:id="@+id/et_userEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:fontFamily="sans-serif-thin"
+                    android:hint="Username"
+                    android:inputType="textEmailAddress"
+                    android:textStyle="normal|normal">
+                </EditText>
+                <EditText
+                    android:id="@+id/et_userPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:fontFamily="sans-serif-thin"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:textStyle="normal|normal" />
+            </LinearLayout>
+            <CheckBox
+                android:id="@+id/cb_autoLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="Remember me" />
+            <Button
+                android:id="@+id/but_loginButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="3"
+                android:background="#f69e90"
+                android:onClick="login"
+                android:text="Logon"
+                android:textColor="@android:color/white" />
+            <Button
+                android:id="@+id/tv_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="3"
+                android:background="#84c4d3"
+                android:clickable="true"
+                android:hint="Password"
+                android:onClick="register"
+                android:text="Register"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </FrameLayout>
+</ScrollView>
+

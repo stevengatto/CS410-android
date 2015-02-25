@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/poll_list_background">
+
+    <FrameLayout android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_gravity="center">
+
+            <TextView android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:textSize="32sp"
+                android:fontFamily="sans-serif-thin"
+                android:textStyle="normal|normal"
+                android:text="REGISTER"/>
+
+            <TextView android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif-thin"
+                android:textStyle="normal|italic"
+                android:text="create an account to start voting!"/>
+
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@drawable/register_box"
+                android:paddingLeft="20dp"
+                android:orientation="vertical">
+
+                <EditText android:id="@+id/et_register_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="sans-serif-thin"
+                    android:textStyle="normal|normal"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:background="@android:color/transparent"/>
+
+                <EditText android:id="@+id/et_register_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="sans-serif-thin"
+                    android:textStyle="normal|normal"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:background="@android:color/transparent"/>
+
+                <EditText android:id="@+id/et_register_passwordConfirmation"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="sans-serif-thin"
+                    android:textStyle="normal|normal"
+                    android:hint="Confirm Password"
+                    android:inputType="textPassword"
+                    android:background="@android:color/transparent"/>
+
+            </LinearLayout>
+
+            <Button android:id="@+id/but_registerButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="registerNewAccount"
+                android:text="Register"
+                android:background="@color/bg_button"
+                android:textStyle="normal|normal"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="20dp"
+                />
+        </LinearLayout>
+
+    </FrameLayout>
+
+</ScrollView>
+

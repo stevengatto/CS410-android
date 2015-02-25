@@ -1,1 +1,4 @@
 include ':app'
+
+include ':MechMaid'
+project(':MechMaid').projectDir = new File('app/libs/MechMaid')

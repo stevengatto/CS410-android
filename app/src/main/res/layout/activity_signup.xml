@@ -40,6 +40,17 @@
                 android:paddingLeft="20dp"
                 android:orientation="vertical">
 
+                <EditText android:id="@+id/et_register_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="sans-serif-thin"
+                    android:textStyle="normal|normal"
+                    android:hint="Name"
+                    android:inputType="text"
+                    android:background="@android:color/transparent"/>
+
                 <EditText android:id="@+id/et_register_email"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -59,17 +70,6 @@
                     android:fontFamily="sans-serif-thin"
                     android:textStyle="normal|normal"
                     android:hint="Password"
-                    android:inputType="textPassword"
-                    android:background="@android:color/transparent"/>
-
-                <EditText android:id="@+id/et_register_passwordConfirmation"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:fontFamily="sans-serif-thin"
-                    android:textStyle="normal|normal"
-                    android:hint="Confirm Password"
                     android:inputType="textPassword"
                     android:background="@android:color/transparent"/>
 

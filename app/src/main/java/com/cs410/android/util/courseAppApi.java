@@ -1,10 +1,14 @@
 package com.cs410.android.util;
 
+import com.cs410.android.model.Course;
 import com.cs410.android.model.SigninResponse;
 import com.cs410.android.model.User;
 
+import java.util.List;
+
 import retrofit.Callback;
 import retrofit.http.Body;
+import retrofit.http.GET;
 import retrofit.http.POST;
 
 /**
@@ -37,4 +41,7 @@ public interface CourseAppApi {
      */
     @POST("/users")
     void signUp(@Body User userToSignUp, Callback<SigninResponse> callback);
+
+    @GET("/courses")
+    void getCourses(Callback<List<Course>> callback);
 }

@@ -12,11 +12,14 @@ import android.view.Window;
 import android.widget.EditText;
 
 import com.cs410.android.R;
+import com.cs410.android.model.Course;
 import com.cs410.android.model.SigninResponse;
 import com.cs410.android.model.User;
 import com.cs410.android.util.AccountUtils;
 import com.cs410.android.util.CourseAppApi;
 import com.cs410.android.util.WebUtils;
+
+import java.util.List;
 
 import retrofit.client.Response;
 
@@ -55,7 +58,13 @@ public class SignInActivity extends Activity {
 
     public void registerClick(View v){
         //Does this work for you STEVE?
-        startActivity(new Intent(this, SignUpActivity.class));
+        //startActivity(new Intent(this, SignUpActivity.class));
+        AccountUtils.getUnauthenticatedApiInterface().getCourses(new WebUtils.RetroCallback<List<Course>>(this) {
+            @Override
+            public void success(List<Course> courses, Response response) {
+                return;
+            }
+        });
     }
 
     /**

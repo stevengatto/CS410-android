@@ -89,7 +89,6 @@ public class AccountUtils {
 
     public static CourseAppApi getUnauthenticatedApiInterface(){
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setEndpoint(WebUtils.BASE_API_URL)
                 .setClient(new OkClient())
                 .build();

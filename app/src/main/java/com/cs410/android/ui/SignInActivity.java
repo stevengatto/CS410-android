@@ -57,14 +57,8 @@ public class SignInActivity extends Activity {
     }
 
     public void registerClick(View v){
-        //Does this work for you STEVE?
-        //startActivity(new Intent(this, SignUpActivity.class));
-        AccountUtils.getUnauthenticatedApiInterface().getCourses(new WebUtils.RetroCallback<List<Course>>(this) {
-            @Override
-            public void success(List<Course> courses, Response response) {
-                return;
-            }
-        });
+        // Does this work for you STEVE?
+        startActivity(new Intent(this, SignUpActivity.class));
     }
 
     /**
@@ -85,7 +79,7 @@ public class SignInActivity extends Activity {
             // Create the account on the device and set the auth token we got
             Log.d(TAG, "Adding new account to account manager");
             accountManager.addAccountExplicitly(account, password, null);
-            accountManager.setAuthToken(account, AccountUtils.AUTHTOKEN_TYPE, signinResponse.token);
+            accountManager.setAuthToken(account, AccountUtils.AUTHTOKEN_TYPE, "Bearer " + signinResponse.token);
         }
     }
 }

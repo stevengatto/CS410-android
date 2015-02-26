@@ -11,12 +11,6 @@ public class Course {
     public String description;
     public String date;
     public String category;
-
-    private class Author{
-        public String _id;
-        public String name;
-
-    }
 }
 
 

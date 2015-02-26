@@ -72,7 +72,7 @@ public class SignUpActivity extends Activity {
             // Create the account on the device and set the auth token we got
             Log.d(TAG, "Adding new account to account manager");
             accountManager.addAccountExplicitly(account, password, null);
-            accountManager.setAuthToken(account, AccountUtils.AUTHTOKEN_TYPE, signinResponse.token);
+            accountManager.setAuthToken(account, AccountUtils.AUTHTOKEN_TYPE, "Bearer " + signinResponse.token);
         }
     }
 }

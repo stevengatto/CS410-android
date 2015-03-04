@@ -12,14 +12,11 @@ import android.view.Window;
 import android.widget.EditText;
 
 import com.cs410.android.R;
-import com.cs410.android.model.Course;
 import com.cs410.android.model.SigninResponse;
 import com.cs410.android.model.User;
 import com.cs410.android.util.AccountUtils;
 import com.cs410.android.util.CourseAppApi;
 import com.cs410.android.util.WebUtils;
-
-import java.util.List;
 
 import retrofit.client.Response;
 

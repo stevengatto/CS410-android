@@ -15,7 +15,6 @@ import com.cs410.android.model.User;
 import com.cs410.android.util.AccountUtils;
 import com.cs410.android.util.CourseAppApi;
 import com.cs410.android.util.WebUtils;
-import com.overthink.mechmaid.util.Toaster;
 
 import retrofit.client.Response;
 

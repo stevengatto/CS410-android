@@ -2,14 +2,17 @@ package com.cs410.android.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.cs410.android.R;
 import com.cs410.android.model.Course;
 import com.cs410.android.util.AccountUtils;
@@ -45,6 +48,7 @@ public class CourseListActivity extends Activity {
     private class CourseHolder extends RecyclerView.ViewHolder {
 
         private TextView title, author, category;
+        private ImageView course_icon;
 
         public CourseHolder(View itemView) {
             super(itemView);
@@ -52,12 +56,17 @@ public class CourseListActivity extends Activity {
             title = (TextView) itemView.findViewById(R.id.item_course_list_title);
             author = (TextView) itemView.findViewById(R.id.item_course_list_author);
             category = (TextView) itemView.findViewById(R.id.item_course_list_category);
+
+            course_icon = (ImageView) itemView.findViewById(R.id.course_icon);
         }
 
         private void bindCourse(Course course) {
             title.setText(course.title);
             author.setText(course.author.name);
             category.setText(course.category);
+
+            Glide.with(getApplicationContext()).load("http://cliparts.co/cliparts/5cR/X6a/5cRX6adMi.jpg")
+                    .fitCenter().into(course_icon);
         }
     }
 
@@ -75,6 +84,16 @@ public class CourseListActivity extends Activity {
         @Override
         public CourseHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
             View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_course_list, viewGroup, false);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = recyclerView.getChildPosition(v);
+                    String courseId = courseList.get(position)._id;
+                    Intent activityIntent = new Intent(this, <something>);
+                    activityIntent.putExtra("id", courseId);
+                    startActivity(activityIntent);
+                }
+            });
             return new CourseHolder(view);
         }
 

@@ -10,6 +10,7 @@ import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
+import retrofit.http.Path;
 
 /**
  * Interface to turn the Nimblenotes API into a Java Interface
@@ -44,4 +45,7 @@ public interface CourseAppApi {
 
     @GET("/courses")
     void getCourses(Callback<List<Course>> callback);
+
+    @GET("/users/{id}")
+    void getSingleCourse(@Path("id") String id,Callback<Course> callback);
 }

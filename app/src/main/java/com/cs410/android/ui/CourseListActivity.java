@@ -17,6 +17,9 @@ import com.cs410.android.R;
 import com.cs410.android.model.Course;
 import com.cs410.android.util.AccountUtils;
 import com.cs410.android.util.WebUtils;
+import com.overthink.mechmaid.util.Toaster;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -47,7 +50,7 @@ public class CourseListActivity extends Activity {
 
     private class CourseHolder extends RecyclerView.ViewHolder {
 
-        private TextView title, author, category;
+        private TextView title, author, category, date;
         private ImageView course_icon;
 
         public CourseHolder(View itemView) {
@@ -56,17 +59,30 @@ public class CourseListActivity extends Activity {
             title = (TextView) itemView.findViewById(R.id.item_course_list_title);
             author = (TextView) itemView.findViewById(R.id.item_course_list_author);
             category = (TextView) itemView.findViewById(R.id.item_course_list_category);
-
-            course_icon = (ImageView) itemView.findViewById(R.id.course_icon);
+            date = (TextView) itemView.findViewById(R.id.item_course_list_date);
+            course_icon = (ImageView) itemView.findViewById(R.id.item_course_list_icon);
         }
 
         private void bindCourse(Course course) {
             title.setText(course.title);
             author.setText(course.author.name);
             category.setText(course.category);
+            date.setText(formatDate(course.date));
 
-            Glide.with(getApplicationContext()).load("http://cliparts.co/cliparts/5cR/X6a/5cRX6adMi.jpg")
-                    .fitCenter().into(course_icon);
+            Glide.with(getApplicationContext())
+                .load("http://www.757angelsgroup.com/show/main-profile/wiki-image" +
+                        "/20140518072131!Placeholder.png")
+                .fitCenter()
+                .into(course_icon);
+        }
+
+        private String formatDate(String date) {
+            String month = null;
+            String[] months = {"January", "February", "March", "April", "May", "June", "July",
+                "August", "September", "October", "November", "December" };
+            String[] split = date.split("-");
+            return months[Integer.parseInt(split[1].trim())] + " " + split[2].split("T")[0] +
+                    ", " + split[0];
         }
     }
 
@@ -89,9 +105,10 @@ public class CourseListActivity extends Activity {
                 public void onClick(View v) {
                     int position = recyclerView.getChildPosition(v);
                     String courseId = courseList.get(position)._id;
-                    Intent activityIntent = new Intent(this, <something>);
-                    activityIntent.putExtra("id", courseId);
-                    startActivity(activityIntent);
+                    Toaster.showToastFromString(getApplicationContext(), "" + position);
+//                    Intent activityIntent = new Intent(this, <something>);
+//                    activityIntent.putExtra("id", courseId);
+//                    startActivity(activityIntent);
                 }
             });
             return new CourseHolder(view);

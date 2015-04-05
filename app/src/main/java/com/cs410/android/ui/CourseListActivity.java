@@ -19,8 +19,6 @@ import com.cs410.android.util.AccountUtils;
 import com.cs410.android.util.WebUtils;
 import com.overthink.mechmaid.util.Toaster;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import retrofit.client.Response;
@@ -38,7 +36,6 @@ public class CourseListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_list);
         initialize();
-
     }
 
     private void initialize() {
@@ -51,7 +48,7 @@ public class CourseListActivity extends Activity {
     private class CourseHolder extends RecyclerView.ViewHolder {
 
         private TextView title, author, category, date;
-        private ImageView course_icon;
+        private ImageView icon;
 
         public CourseHolder(View itemView) {
             super(itemView);
@@ -60,7 +57,7 @@ public class CourseListActivity extends Activity {
             author = (TextView) itemView.findViewById(R.id.item_course_list_author);
             category = (TextView) itemView.findViewById(R.id.item_course_list_category);
             date = (TextView) itemView.findViewById(R.id.item_course_list_date);
-            course_icon = (ImageView) itemView.findViewById(R.id.item_course_list_icon);
+            icon = (ImageView) itemView.findViewById(R.id.item_course_list_icon);
         }
 
         private void bindCourse(Course course) {
@@ -73,11 +70,10 @@ public class CourseListActivity extends Activity {
                 .load("http://www.757angelsgroup.com/show/main-profile/wiki-image" +
                         "/20140518072131!Placeholder.png")
                 .fitCenter()
-                .into(course_icon);
+                .into(icon);
         }
 
         private String formatDate(String date) {
-            String month = null;
             String[] months = {"January", "February", "March", "April", "May", "June", "July",
                 "August", "September", "October", "November", "December" };
             String[] split = date.split("-");
@@ -98,7 +94,7 @@ public class CourseListActivity extends Activity {
         }
 
         @Override
-        public CourseHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        public CourseHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
             View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_course_list, viewGroup, false);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -106,9 +102,9 @@ public class CourseListActivity extends Activity {
                     int position = recyclerView.getChildPosition(v);
                     String courseId = courseList.get(position)._id;
                     Toaster.showToastFromString(getApplicationContext(), "" + position);
-//                    Intent activityIntent = new Intent(this, <something>);
-//                    activityIntent.putExtra("id", courseId);
-//                    startActivity(activityIntent);
+                    Intent activityIntent = new Intent(viewGroup.getContext(), CourseSingleActivity.class);
+                    activityIntent.putExtra("id", courseId);
+                    startActivity(activityIntent);
                 }
             });
             return new CourseHolder(view);

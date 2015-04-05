@@ -46,6 +46,6 @@ public interface CourseAppApi {
     @GET("/courses")
     void getCourses(Callback<List<Course>> callback);
 
-    @GET("/users/{id}")
-    void getSingleCourse(@Path("id") String id,Callback<Course> callback);
+    @GET("/courses/{id}")
+    void getSingleCourse(@Path("id") String id, Callback<Course> callback);
 }

@@ -7,5 +7,7 @@
     <!-- Accounts -->
     <string name="account_type">com.cs410.android</string>
     <string name="course_icon_description">Course Icon</string>
+    <string name="title_activity_course_single">CourseSingleActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

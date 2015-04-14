@@ -42,7 +42,7 @@ public class CourseListActivity extends Activity {
         recyclerView = (RecyclerView) findViewById(R.id.course_list_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        AccountUtils.getUnauthenticatedApiInterface().getCourses(new CourseListCallback(this));
+        AccountUtils.getUnauthenticatedApiInterface().getCourseList(new CourseListCallback(this));
     }
 
     private class CourseHolder extends RecyclerView.ViewHolder {

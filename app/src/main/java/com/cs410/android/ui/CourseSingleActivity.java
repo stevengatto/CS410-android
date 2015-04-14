@@ -40,7 +40,7 @@ public class CourseSingleActivity extends ActionBarActivity {
         icon = (RoundedImageView) findViewById(R.id.single_course_icon);
         lessonListParent = (LinearLayout) findViewById(R.id.single_course_lesson_list_parent);
         String courseId = getIntent().getExtras().getString("id");
-        AccountUtils.getUnauthenticatedApiInterface().getSingleCourse(courseId, new CourseSingleCallback(this));
+        AccountUtils.getUnauthenticatedApiInterface().getCourse(courseId, new CourseSingleCallback(this));
     }
 
     private void setDataInViews(Course course) {

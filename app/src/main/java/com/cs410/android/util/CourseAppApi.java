@@ -43,9 +43,20 @@ public interface CourseAppApi {
     @POST("/users")
     void signUp(@Body User userToSignUp, Callback<SigninResponse> callback);
 
+    /**
+     * GET request to retrieve a list of courses
+     *
+     * @param callback callback method to execute when the GET request finishes
+     */
     @GET("/courses")
-    void getCourses(Callback<List<Course>> callback);
+    void getCourseList(Callback<List<Course>> callback);
 
+    /**
+     * GET request to retrieve a course
+     *
+     * @param id course id to retrieve
+     * @param callback callback method to execute when the GET request finishes
+     */
     @GET("/courses/{id}")
-    void getSingleCourse(@Path("id") String id, Callback<Course> callback);
+    void getCourse(@Path("id") String id, Callback<Course> callback);
 }

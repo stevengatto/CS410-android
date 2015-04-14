@@ -31,7 +31,6 @@ public class WebUtils {
      * Retrofit callback wrapper class that handles all callback errors.
      */
     public static abstract class RetroCallback<T> implements Callback<T> {
-
         private Context context;
 
         public RetroCallback(Context context){
@@ -41,7 +40,7 @@ public class WebUtils {
         /**
          * Handles general retrofit response failures
          *
-         * @param retrofitError
+         * @param retrofitError error caught by retrofit
          */
         @Override
         public void failure(RetrofitError retrofitError) {

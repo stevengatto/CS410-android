@@ -18,13 +18,24 @@ import com.cs410.android.util.AccountUtils;
 import com.cs410.android.util.CourseAppApi;
 import com.cs410.android.util.WebUtils;
 
+import eu.inmite.android.lib.validations.form.FormValidator;
+import eu.inmite.android.lib.validations.form.callback.SimpleErrorPopupCallback;
 import retrofit.client.Response;
+import eu.inmite.android.lib.validations.form.annotations.*;
+import static eu.inmite.android.lib.validations.form.annotations.RegExp.EMAIL;
 
 public class SignInActivity extends Activity {
 
     private static final String TAG = SignUpActivity.class.getSimpleName();
 
-    private EditText txtEmail, txtPassword;
+    @NotEmpty(messageId = R.string.validation_email_empty, order = 1)
+    @RegExp(value = EMAIL, messageId = R.string.validation_email_format, order = 2)
+    private EditText txtEmail;
+
+    @NotEmpty(messageId = R.string.validation_password_empty, order = 3)
+    @MinLength(value = 8, messageId = R.string.validation_password_min_len, order = 4)
+    private EditText txtPassword;
+
     private String email, password;
     private Context context = this;
 
@@ -45,6 +56,11 @@ public class SignInActivity extends Activity {
     }
 
     public void loginClick(View v){
+        // Validate fields, quit if any have errors
+        boolean fieldsValid = FormValidator.validate(this, new SimpleErrorPopupCallback(this, true));
+        if (!fieldsValid) {
+            return;
+        }
         email = txtEmail.getText().toString();
         password = txtPassword.getText().toString();
         User user = new User(email, password);
@@ -54,7 +70,6 @@ public class SignInActivity extends Activity {
     }
 
     public void registerClick(View v){
-        // Does this work for you STEVE?
         startActivity(new Intent(this, SignUpActivity.class));
     }
 

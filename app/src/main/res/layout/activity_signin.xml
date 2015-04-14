@@ -28,7 +28,8 @@
                 android:layout_height="100dp"
                 android:background="@drawable/login_box"
                 android:orientation="vertical"
-                android:paddingLeft="20dp">
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp">
                 <EditText
                     android:id="@+id/et_userEmail"
                     android:layout_width="match_parent"
@@ -37,7 +38,7 @@
                     android:background="@android:color/transparent"
                     android:ems="10"
                     android:fontFamily="sans-serif-thin"
-                    android:hint="Username"
+                    android:hint="Email"
                     android:inputType="textEmailAddress"
                     android:textStyle="normal|normal">
                 </EditText>

@@ -16,7 +16,14 @@ import com.cs410.android.util.AccountUtils;
 import com.cs410.android.util.CourseAppApi;
 import com.cs410.android.util.WebUtils;
 
+import eu.inmite.android.lib.validations.form.FormValidator;
+import eu.inmite.android.lib.validations.form.annotations.MinLength;
+import eu.inmite.android.lib.validations.form.annotations.NotEmpty;
+import eu.inmite.android.lib.validations.form.annotations.RegExp;
+import eu.inmite.android.lib.validations.form.callback.SimpleErrorPopupCallback;
 import retrofit.client.Response;
+
+import static eu.inmite.android.lib.validations.form.annotations.RegExp.EMAIL;
 
 /**
  * Steve's a nerd
@@ -26,7 +33,17 @@ public class SignUpActivity extends Activity {
 
     private static final String TAG = SignUpActivity.class.getSimpleName();
 
-    private EditText txtName, txtEmail, txtPassword;
+    @NotEmpty(messageId = R.string.validation_name_empty, order = 1)
+    private EditText txtName;
+
+    @NotEmpty(messageId = R.string.validation_email_empty, order = 2)
+    @RegExp(value = EMAIL, messageId = R.string.validation_email_format, order = 3)
+    private EditText txtEmail;
+
+    @NotEmpty(messageId = R.string.validation_password_empty, order = 4)
+    @MinLength(value = 8, messageId = R.string.validation_password_min_len, order = 5)
+    private EditText txtPassword;
+
     private String name, email, password;
     private Context context = this;
 
@@ -44,6 +61,11 @@ public class SignUpActivity extends Activity {
     }
 
     public void registerNewAccount(View v) {
+        // Validate fields, quit if any have errors
+        boolean fieldsValid = FormValidator.validate(this, new SimpleErrorPopupCallback(this, true));
+        if (!fieldsValid) {
+            return;
+        }
         name = txtName.getText().toString();
         email = txtEmail.getText().toString();
         password = txtPassword.getText().toString();

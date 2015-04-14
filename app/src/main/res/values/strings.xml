@@ -10,4 +10,11 @@
     <string name="title_activity_course_single">CourseSingleActivity</string>
     <string name="hello_world">Hello world!</string>
 
+    <!-- Form Validation -->
+    <string name="validation_email_empty">Email required</string>
+    <string name="validation_password_empty">Password required</string>
+    <string name="validation_name_empty">Name required</string>
+    <string name="validation_email_format">Incorrect email</string>
+    <string name="validation_password_min_len">Password must be at least 8 characters</string>
+
 </resources>

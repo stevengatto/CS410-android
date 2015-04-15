@@ -14,8 +14,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.cs410.android.R;
+import com.cs410.android.account.Authenticatable;
 import com.cs410.android.model.Course;
 import com.cs410.android.util.AccountUtils;
+import com.cs410.android.util.CourseAppApi;
 import com.cs410.android.util.WebUtils;
 import com.overthink.mechmaid.util.Toaster;
 
@@ -27,7 +29,7 @@ import retrofit.client.Response;
  *
  * Created by user on 2/25/2015.
  */
-public class CourseListActivity extends Activity {
+public class CourseListActivity extends Activity implements Authenticatable {
 
     private RecyclerView recyclerView;
 
@@ -42,7 +44,14 @@ public class CourseListActivity extends Activity {
         recyclerView = (RecyclerView) findViewById(R.id.course_list_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        AccountUtils.getUnauthenticatedApiInterface().getCourseList(new CourseListCallback(this));
+        AccountUtils.authenticate(this, this);
+    }
+
+    @Override
+    public void onAuthReceived(boolean success, CourseAppApi api, Bundle bundle) {
+        if (success) {
+            api.getCourseList(new CourseListCallback(this));
+        }
     }
 
     private class CourseHolder extends RecyclerView.ViewHolder {

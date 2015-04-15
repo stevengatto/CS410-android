@@ -4,6 +4,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +22,7 @@ import eu.inmite.android.lib.validations.form.annotations.MinLength;
 import eu.inmite.android.lib.validations.form.annotations.NotEmpty;
 import eu.inmite.android.lib.validations.form.annotations.RegExp;
 import eu.inmite.android.lib.validations.form.callback.SimpleErrorPopupCallback;
+import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 import static eu.inmite.android.lib.validations.form.annotations.RegExp.EMAIL;
@@ -58,7 +60,7 @@ public class SignUpActivity extends Activity {
         txtName = (EditText) findViewById(R.id.et_register_name);
         txtEmail = (EditText) findViewById(R.id.et_register_email);
         txtPassword = (EditText) findViewById(R.id.et_register_password);
-        FormValidator.startLiveValidation(this, findViewById(R.id.sign_in_form_container),
+        FormValidator.startLiveValidation(this, findViewById(R.id.sign_up_form_container),
                 new SimpleErrorPopupCallback(this));
     }
 
@@ -91,14 +93,24 @@ public class SignUpActivity extends Activity {
 
         @Override
         public void success(SigninResponse signinResponse, Response response) {
-            // create an Account to add/modify in AccountManager
-            AccountManager accountManager = AccountManager.get(context);
-            final Account account = new Account(email, AccountUtils.ACCOUNT_TYPE);
+            String token = "Bearer " + signinResponse.token;
+            boolean addNewAccount = getIntent().getBooleanExtra(AccountUtils.FLAG_ADDING_NEW_ACCOUNT, false);
+            boolean launchActivity = getIntent().getBooleanExtra(AccountUtils.FLAG_LAUNCH_ACTIVITY, false);
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra(AccountUtils.FLAG_ADDING_NEW_ACCOUNT, addNewAccount);
+            resultIntent.putExtra(AccountUtils.FLAG_LAUNCH_ACTIVITY, launchActivity);
+            resultIntent.putExtra(AccountUtils.PARAM_TOKEN, token);
+            resultIntent.putExtra(AccountUtils.PARAM_EMAIL, email);
+            resultIntent.putExtra(AccountUtils.PARAM_PASSWORD, password);
+            setResult(RESULT_OK, resultIntent);
+            finish();
+        }
 
-            // Create the account on the device and set the auth token we got
-            Log.d(TAG, "Adding new account to account manager");
-            accountManager.addAccountExplicitly(account, password, null);
-            accountManager.setAuthToken(account, AccountUtils.AUTHTOKEN_TYPE, "Bearer " + signinResponse.token);
+        @Override
+        public void failure(RetrofitError retrofitError) {
+            super.failure(retrofitError);
+            setResult(RESULT_CANCELED);
+            finish();
         }
     }
 }

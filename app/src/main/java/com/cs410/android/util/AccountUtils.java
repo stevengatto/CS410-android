@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.cs410.android.account.Authenticatable;
+import com.cs410.android.ui.SignInActivity;
 import com.cs410.android.ui.SignUpActivity;
 
 import java.io.IOException;
@@ -41,12 +42,15 @@ public class AccountUtils {
     // Default NimbleNotes authentication token type
     public static final String AUTHTOKEN_TYPE = "AUTHTOKEN_TYPE";
 
-    // Intent flags
+    // Intent flags and params
     public static final String FLAG_ADDING_NEW_ACCOUNT = "ADDING_NEW_ACCOUNT";
     public static final String FLAG_LAUNCH_ACTIVITY = "LAUNCH_ACTIVITY";
+    public static final String PARAM_TOKEN = "PARAM_TOKEN";
+    public static final String PARAM_EMAIL = "PARAM_EMAIL";
+    public static final String PARAM_PASSWORD = "PARAM_PASSWORD";
 
     private static AccountManager accountManager;
-    private static Account hazelnoteAccount;
+    private static Account account;
     private static Context context;
     private static Authenticatable caller;
 
@@ -62,7 +66,7 @@ public class AccountUtils {
     public static void authenticate(Context context, Authenticatable caller) {
         AccountUtils.context = context;
         AccountUtils.caller = caller;
-        accountManager = AccountManager.get(context);
+        AccountUtils.accountManager = AccountManager.get(context);
 
 
         // Retrieve list of Accounts in the AccountManager and check if any match that of ours
@@ -70,13 +74,13 @@ public class AccountUtils {
         Account[] accounts = accountManager.getAccountsByType(ACCOUNT_TYPE);
         if (accounts.length > 0) {
             Log.d(TAG, "Account found. Calling getAuthToken");
-            hazelnoteAccount = accounts[0];
+            account = accounts[0];
             (new GetAuthTokenAsyncTask()).execute();
         }
         // If no Account exists, add Account then getAuthToken
         else {
             Log.d(TAG, "No account found. Creating account then calling getAuthToken");
-            Intent intent = new Intent(context, SignUpActivity.class);
+            Intent intent = new Intent(context, SignInActivity.class);
             // Add flag to mark that a new Account must be created
             intent.putExtra(FLAG_ADDING_NEW_ACCOUNT, true);
             intent.putExtra(FLAG_LAUNCH_ACTIVITY, true);
@@ -87,19 +91,10 @@ public class AccountUtils {
         }
     }
 
+    // USES SERVER BASE URL NOT API BASE URL!!!!!!
     public static CourseAppApi getUnauthenticatedApiInterface(){
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint(WebUtils.BASE_API_URL)
-                .setClient(new OkClient())
-                .build();
-
-        // Create api to interact with the server as a Java interface
-        return restAdapter.create(CourseAppApi.class);
-    }
-
-    public static CourseAppApi getUnauthenticatedSignInApiInterface(){
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setLogLevel(RestAdapter.LogLevel.FULL)
+//                .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setEndpoint(WebUtils.SERVER)
                 .setClient(new OkClient())
                 .build();
@@ -108,7 +103,7 @@ public class AccountUtils {
         return restAdapter.create(CourseAppApi.class);
     }
 
-    public static CourseAppApi getAuthenticatedApiInterface(final String authToken){
+    private static CourseAppApi getAuthenticatedApiInterface(final String authToken){
         // Create request interceptor to add headers to retrofit web calls
         RequestInterceptor requestInterceptor = new RequestInterceptor() {
             @Override
@@ -141,8 +136,8 @@ public class AccountUtils {
          */
         @Override
         protected Bundle doInBackground(Void... params) {
-            if (hazelnoteAccount != null) {
-                AccountManagerFuture future = accountManager.getAuthToken(hazelnoteAccount,
+            if (account != null) {
+                AccountManagerFuture future = accountManager.getAuthToken(account,
                         AUTHTOKEN_TYPE, null, (Activity) context, null, null);
                 try {
                     return (Bundle) future.getResult();

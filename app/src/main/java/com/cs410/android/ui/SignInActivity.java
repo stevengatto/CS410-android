@@ -53,6 +53,8 @@ public class SignInActivity extends Activity {
     private void initialize() {
         txtEmail = (EditText) findViewById(R.id.et_userEmail);
         txtPassword = (EditText) findViewById(R.id.et_userPassword);
+        FormValidator.startLiveValidation(this, findViewById(R.id.sign_in_form_container),
+                new SimpleErrorPopupCallback(this));
     }
 
     public void loginClick(View v){
@@ -60,7 +62,10 @@ public class SignInActivity extends Activity {
         boolean fieldsValid = FormValidator.validate(this, new SimpleErrorPopupCallback(this, true));
         if (!fieldsValid) {
             return;
+        } else {
+            FormValidator.stopLiveValidation(this);
         }
+
         email = txtEmail.getText().toString();
         password = txtPassword.getText().toString();
         User user = new User(email, password);

@@ -58,6 +58,8 @@ public class SignUpActivity extends Activity {
         txtName = (EditText) findViewById(R.id.et_register_name);
         txtEmail = (EditText) findViewById(R.id.et_register_email);
         txtPassword = (EditText) findViewById(R.id.et_register_password);
+        FormValidator.startLiveValidation(this, findViewById(R.id.sign_in_form_container),
+                new SimpleErrorPopupCallback(this));
     }
 
     public void registerNewAccount(View v) {
@@ -65,7 +67,10 @@ public class SignUpActivity extends Activity {
         boolean fieldsValid = FormValidator.validate(this, new SimpleErrorPopupCallback(this, true));
         if (!fieldsValid) {
             return;
+        } else {
+            FormValidator.stopLiveValidation(this);
         }
+
         name = txtName.getText().toString();
         email = txtEmail.getText().toString();
         password = txtPassword.getText().toString();

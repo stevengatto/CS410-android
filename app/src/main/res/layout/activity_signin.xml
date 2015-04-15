@@ -24,6 +24,7 @@
                 android:textSize="32sp"
                 android:textStyle="normal|bold" />
             <LinearLayout
+                android:id="@+id/sign_in_form_container"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:background="@drawable/login_box"

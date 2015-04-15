@@ -1,6 +1,7 @@
 package com.cs410.android.util;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.overthink.mechmaid.util.Toaster;
 
@@ -32,6 +33,7 @@ public class WebUtils {
      */
     public static abstract class RetroCallback<T> implements Callback<T> {
         private Context context;
+        private Toast currentToast;
 
         public RetroCallback(Context context){
             this.context = context;
@@ -46,17 +48,24 @@ public class WebUtils {
         public void failure(RetrofitError retrofitError) {
             switch(retrofitError.getKind()) {
                 case HTTP:
-                    Toaster.showToastFromString(context, "Error: " + retrofitError.getResponse().getStatus());
+                    currentToast = Toaster.showToastFromString(context, "Error: "
+                            + retrofitError.getResponse().getStatus());
                     break;
                 case CONVERSION:
-                    Toaster.showToastFromString(context, "Conversion Error");
+                    currentToast = Toaster.showToastFromString(context, "Conversion Error");
                     break;
                 case NETWORK:
-                    Toaster.showToastFromString(context, "Network Error");
+                    currentToast = Toaster.showToastFromString(context, "Network Error");
                     break;
                 case UNEXPECTED:
-                    Toaster.showToastFromString(context, "Unexpected Error");
+                    currentToast = Toaster.showToastFromString(context, "Unexpected Error");
                     break;
+            }
+        }
+
+        protected void cancelCurrentToast() {
+            if (currentToast != null) {
+                currentToast.cancel();
             }
         }
     }

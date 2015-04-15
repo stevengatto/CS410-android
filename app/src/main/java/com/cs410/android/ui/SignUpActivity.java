@@ -69,8 +69,6 @@ public class SignUpActivity extends Activity {
         boolean fieldsValid = FormValidator.validate(this, new SimpleErrorPopupCallback(this, true));
         if (!fieldsValid) {
             return;
-        } else {
-            FormValidator.stopLiveValidation(this);
         }
 
         name = txtName.getText().toString();

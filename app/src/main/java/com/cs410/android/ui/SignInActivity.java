@@ -68,8 +68,6 @@ public class SignInActivity extends AccountAuthenticatorActivity {
         boolean fieldsValid = FormValidator.validate(this, new SimpleErrorPopupCallback(this, true));
         if (!fieldsValid) {
             return;
-        } else {
-            FormValidator.stopLiveValidation(this);
         }
 
         email = txtEmail.getText().toString();

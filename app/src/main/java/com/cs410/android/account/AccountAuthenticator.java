@@ -136,7 +136,7 @@ public class AccountAuthenticator extends AbstractAccountAuthenticator {
 
         try {
             User user = new User(email, password);
-            SigninResponse signinResponse = AccountUtils.getUnauthenticatedApiInterface().signIn(user);
+            SigninResponse signinResponse = AccountUtils.getUnauthenticatedAuthInterface().signIn(user);
             authtoken = signinResponse.token;
         } catch (RetrofitError e) {
             // Do nothing

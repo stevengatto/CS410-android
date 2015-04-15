@@ -91,11 +91,21 @@ public class AccountUtils {
         }
     }
 
-    // USES SERVER BASE URL NOT API BASE URL!!!!!!
-    public static CourseAppApi getUnauthenticatedApiInterface(){
+    public static CourseAppApi getUnauthenticatedAuthInterface(){
         RestAdapter restAdapter = new RestAdapter.Builder()
 //                .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setEndpoint(WebUtils.SERVER)
+                .setClient(new OkClient())
+                .build();
+
+        // Create api to interact with the server as a Java interface
+        return restAdapter.create(CourseAppApi.class);
+    }
+
+    public static CourseAppApi getUnauthenticatedApiInterface(){
+        RestAdapter restAdapter = new RestAdapter.Builder()
+//                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setEndpoint(WebUtils.BASE_API_URL)
                 .setClient(new OkClient())
                 .build();
 
@@ -114,12 +124,13 @@ public class AccountUtils {
 
         // Create Rest adapter using the OkHttp library as a client
         RestAdapter restAdapter = new RestAdapter.Builder()
+//                .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setEndpoint(WebUtils.BASE_API_URL)
                 .setClient(new OkClient())
                 .setRequestInterceptor(requestInterceptor)
                 .build();
 
-        // Create nimblenote api to interact with the server as a Java interface
+        // Create api to interact with the server as a Java interface
         return restAdapter.create(CourseAppApi.class);
     }
 

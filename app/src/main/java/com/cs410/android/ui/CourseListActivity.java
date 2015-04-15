@@ -1,11 +1,12 @@
 package com.cs410.android.ui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,7 @@ import retrofit.client.Response;
  *
  * Created by user on 2/25/2015.
  */
-public class CourseListActivity extends Activity implements Authenticatable {
+public class CourseListActivity extends ActionBarActivity {
 
     private RecyclerView recyclerView;
 
@@ -43,15 +44,9 @@ public class CourseListActivity extends Activity implements Authenticatable {
     private void initialize() {
         recyclerView = (RecyclerView) findViewById(R.id.course_list_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        AccountUtils.authenticate(this, this);
-    }
-
-    @Override
-    public void onAuthReceived(boolean success, CourseAppApi api, Bundle bundle) {
-        if (success) {
-            api.getCourseList(new CourseListCallback(this));
-        }
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        getSupportActionBar().setTitle("Course List");
+        AccountUtils.getUnauthenticatedApiInterface().getCourseList(new CourseListCallback(this));
     }
 
     private class CourseHolder extends RecyclerView.ViewHolder {
@@ -76,9 +71,8 @@ public class CourseListActivity extends Activity implements Authenticatable {
             date.setText(formatDate(course.date));
 
             Glide.with(getApplicationContext())
-                .load("http://www.757angelsgroup.com/show/main-profile/wiki-image" +
-                        "/20140518072131!Placeholder.png")
-                .fitCenter()
+                .load("http://www.reachnettings.com/wp-content/uploads/2014/02/placeholder-1024x640.png")
+                .centerCrop()
                 .into(icon);
         }
 

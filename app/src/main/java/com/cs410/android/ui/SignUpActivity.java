@@ -1,12 +1,9 @@
 package com.cs410.android.ui;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -76,7 +73,7 @@ public class SignUpActivity extends Activity {
         password = txtPassword.getText().toString();
 
         User user = new User(name, email, password);
-        CourseAppApi api = AccountUtils.getUnauthenticatedApiInterface();
+        CourseAppApi api = AccountUtils.getUnauthenticatedAuthInterface();
         api.signUp(user, new SignUpCallback(this));
     }
 

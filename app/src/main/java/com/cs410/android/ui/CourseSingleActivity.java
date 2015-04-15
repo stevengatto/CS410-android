@@ -8,9 +8,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.cs410.android.R;
+import com.cs410.android.account.Authenticatable;
 import com.cs410.android.model.Course;
 import com.cs410.android.model.Lesson;
 import com.cs410.android.util.AccountUtils;
+import com.cs410.android.util.CourseAppApi;
 import com.cs410.android.util.WebUtils;
 import com.makeramen.roundedimageview.RoundedImageView;
 
@@ -28,6 +30,7 @@ public class CourseSingleActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_course_single);
         initialize();
     }
@@ -52,9 +55,8 @@ public class CourseSingleActivity extends ActionBarActivity {
 
         // set rounded image
         Glide.with(getApplicationContext())
-                .load("http://www.757angelsgroup.com/show/main-profile/wiki-image" +
-                        "/20140518072131!Placeholder.png")
-                .fitCenter()
+                .load("http://www.reachnettings.com/wp-content/uploads/2014/02/placeholder-1024x640.png")
+                .centerCrop()
                 .into(icon);
 
         // populate lessons programatically in LinearLayout

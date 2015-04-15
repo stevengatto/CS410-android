@@ -3,7 +3,6 @@ package com.cs410.android.ui;
 import android.accounts.Account;
 import android.accounts.AccountAuthenticatorActivity;
 import android.accounts.AccountManager;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -74,7 +73,7 @@ public class SignInActivity extends AccountAuthenticatorActivity {
         password = txtPassword.getText().toString();
         User user = new User(email, password);
 
-        CourseAppApi api = AccountUtils.getUnauthenticatedApiInterface();
+        CourseAppApi api = AccountUtils.getUnauthenticatedAuthInterface();
         api.signIn(user, new SignInCallback(this));
     }
 

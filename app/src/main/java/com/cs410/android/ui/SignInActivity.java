@@ -17,9 +17,12 @@ import com.cs410.android.model.User;
 import com.cs410.android.util.AccountUtils;
 import com.cs410.android.util.CourseAppApi;
 import com.cs410.android.util.WebUtils;
+import com.overthink.mechmaid.util.Toaster;
 
 import eu.inmite.android.lib.validations.form.FormValidator;
 import eu.inmite.android.lib.validations.form.callback.SimpleErrorPopupCallback;
+import eu.inmite.android.lib.validations.form.callback.SimpleToastCallback;
+import retrofit.RetrofitError;
 import retrofit.client.Response;
 import eu.inmite.android.lib.validations.form.annotations.*;
 import static eu.inmite.android.lib.validations.form.annotations.RegExp.EMAIL;
@@ -96,7 +99,17 @@ public class SignInActivity extends Activity {
             // Create the account on the device and set the auth token we got
             Log.d(TAG, "Adding new account to account manager");
             accountManager.addAccountExplicitly(account, password, null);
-            accountManager.setAuthToken(account, AccountUtils.AUTHTOKEN_TYPE, "Bearer " + signinResponse.token);
+            accountManager.setAuthToken(account, AccountUtils.AUTHTOKEN_TYPE, "Bearer "
+                    + signinResponse.token);
+        }
+
+        @Override
+        public void failure(RetrofitError retrofitError) {
+            super.failure(retrofitError);
+            if (retrofitError.getResponse().getStatus() == 401) {
+                super.cancelCurrentToast();
+                Toaster.showToastFromString(context, "Incorrect username or password");
+            }
         }
     }
 }

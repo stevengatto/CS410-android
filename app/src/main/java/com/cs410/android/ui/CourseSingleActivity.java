@@ -15,6 +15,7 @@ import com.cs410.android.util.AccountUtils;
 import com.cs410.android.util.CourseAppApi;
 import com.cs410.android.util.WebUtils;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.overthink.mechmaid.progress.ProgressableContentFrame;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +24,10 @@ import retrofit.client.Response;
 
 public class CourseSingleActivity extends ActionBarActivity {
 
-    TextView title, author, category, date;
-    RoundedImageView icon;
-    LinearLayout lessonListParent;
+    private TextView title, author, category, date;
+    private RoundedImageView icon;
+    private LinearLayout lessonListParent;
+    private ProgressableContentFrame contentFrame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class CourseSingleActivity extends ActionBarActivity {
     }
 
     private void initialize() {
+        contentFrame = (ProgressableContentFrame) findViewById(R.id.course_single_progress_content_frame);
+        contentFrame.showProgress();
         title = (TextView) findViewById(R.id.single_course_title);
         author = (TextView) findViewById(R.id.single_course_author);
         category = (TextView) findViewById(R.id.single_course_category);
@@ -104,6 +108,7 @@ public class CourseSingleActivity extends ActionBarActivity {
 
         @Override
         public void success(Course course, Response response) {
+            contentFrame.showContent();
             course.lessons = getTestLessonsData();
             setDataInViews(course);
         }

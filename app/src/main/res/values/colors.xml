@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="action_bar">#810081</color>
+    <color name="brand">@color/action_bar</color>
 
     <color name="poll_list_background">#EFEFEF</color>
     <color name="divider">#20ffffff</color>
@@ -9,4 +10,9 @@
     <color name="bg_button">#FB8471</color>
     <color name="text_button">#FFFFFF</color>
     <color name="button_blue">#84C4D3</color>
+
+    <color name="refresh_spinner_1">@color/brand</color>
+    <color name="refresh_spinner_2">@android:color/darker_gray</color>
+    <color name="refresh_spinner_3">@color/brand</color>
+    <color name="refresh_spinner_4">@android:color/darker_gray</color>
 </resources>

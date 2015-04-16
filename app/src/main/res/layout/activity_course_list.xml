@@ -12,12 +12,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/course_list_recycler"
-            android:layout_height="match_parent"
+        <com.overthink.mechmaid.progress.ProgressableContentFrame
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:nimblenotes="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/course_list_progress_content_frame"
             android:layout_width="match_parent"
-            android:clipToPadding="false"
-            android:padding="4dp"/>
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            nimblenotes:content_container_id="@+id/course_list_recycler"
+            nimblenotes:progress_container_id="@+id/course_list_progress">
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/course_list_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/course_list_recycler"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:clipToPadding="false"
+                    android:padding="4dp"/>
+
+            </android.support.v4.widget.SwipeRefreshLayout>
+
+            <com.overthink.mechmaid.progress.DefaultProgressView
+                android:id="@id/course_list_progress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </com.overthink.mechmaid.progress.ProgressableContentFrame>
 
         <View
             android:layout_width="match_parent"

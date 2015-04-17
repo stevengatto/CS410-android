@@ -66,7 +66,7 @@ public class CourseListActivity extends ActionBarActivity {
         recyclerView = (RecyclerView) findViewById(R.id.course_list_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        setSupportActionBar((Toolbar) findViewById(R.id.course_list_toolbar));
         getSupportActionBar().setTitle("Course List");
 
         AccountUtils.getUnauthenticatedApiInterface().getCourseList(new CourseListCallback(this));

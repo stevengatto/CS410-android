@@ -37,7 +37,8 @@
 
         <activity
             android:name=".ui.CourseSingleActivity"
-            android:label="@string/title_activity_course_single" >
+            android:label="@string/title_activity_course_single"
+            android:parentActivityName="com.cs410.android.ui.CourseListActivity" >
         </activity>
     </application>
 

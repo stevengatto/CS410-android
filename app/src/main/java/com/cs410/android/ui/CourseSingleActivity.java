@@ -1,18 +1,19 @@
 package com.cs410.android.ui;
 
 import android.content.Context;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.cs410.android.R;
-import com.cs410.android.account.Authenticatable;
 import com.cs410.android.model.Course;
 import com.cs410.android.model.Lesson;
 import com.cs410.android.util.AccountUtils;
-import com.cs410.android.util.CourseAppApi;
 import com.cs410.android.util.WebUtils;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.overthink.mechmaid.progress.ProgressableContentFrame;
@@ -40,12 +41,21 @@ public class CourseSingleActivity extends ActionBarActivity {
     private void initialize() {
         contentFrame = (ProgressableContentFrame) findViewById(R.id.course_single_progress_content_frame);
         contentFrame.showProgress();
+
         title = (TextView) findViewById(R.id.single_course_title);
         author = (TextView) findViewById(R.id.single_course_author);
         category = (TextView) findViewById(R.id.single_course_category);
         date = (TextView) findViewById(R.id.single_course_date);
         icon = (RoundedImageView) findViewById(R.id.single_course_icon);
         lessonListParent = (LinearLayout) findViewById(R.id.single_course_lesson_list_parent);
+
+        findViewById(R.id.course_single_up_nav_arrow).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         String courseId = getIntent().getExtras().getString("id");
         AccountUtils.getUnauthenticatedApiInterface().getCourse(courseId, new CourseSingleCallback(this));
     }

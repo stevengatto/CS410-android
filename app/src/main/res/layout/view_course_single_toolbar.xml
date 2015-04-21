@@ -29,24 +29,38 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
+            android:contentDescription="Navigation up arrow"
             android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha"/>
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/single_course_icon"
+        <FrameLayout
+            android:id="@+id/single_course_icon_frame"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:layout_below="@+id/course_single_up_nav_arrow"
             android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            app:riv_border_color="#3F51B5"
-            app:riv_border_width="2dip"
-            app:riv_oval="true" />
+            android:layout_centerVertical="true">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/single_course_icon"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                app:riv_border_width="1dp"
+                app:riv_border_color="#ccc"
+                app:riv_oval="true" />
+
+            <ProgressBar
+                android:id="@+id/single_course_icon_progress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp"/>
+
+        </FrameLayout>
 
         <TextView
             android:id="@+id/single_course_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/single_course_icon"
+            android:layout_toEndOf="@id/single_course_icon_frame"
             android:layout_below="@+id/course_single_up_nav_arrow"
             android:ellipsize="marquee"
             android:maxLines="1"
@@ -54,7 +68,6 @@
             android:paddingBottom="18dp"
             android:paddingEnd="12dp"
             android:paddingStart="12dp"
-            android:text="This is an example title"
             android:textColor="@android:color/white"
             android:textSize="28sp" />
 

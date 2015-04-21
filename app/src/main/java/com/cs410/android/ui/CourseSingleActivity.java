@@ -7,9 +7,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.cs410.android.R;
 import com.cs410.android.model.Course;
 import com.cs410.android.model.Lesson;
@@ -29,6 +33,7 @@ public class CourseSingleActivity extends ActionBarActivity {
     private RoundedImageView icon;
     private LinearLayout lessonListParent;
     private ProgressableContentFrame contentFrame;
+    private ProgressBar iconProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,7 @@ public class CourseSingleActivity extends ActionBarActivity {
         category = (TextView) findViewById(R.id.single_course_category);
         date = (TextView) findViewById(R.id.single_course_date);
         icon = (RoundedImageView) findViewById(R.id.single_course_icon);
+        iconProgressBar = (ProgressBar) findViewById(R.id.single_course_icon_progress);
         lessonListParent = (LinearLayout) findViewById(R.id.single_course_lesson_list_parent);
 
         findViewById(R.id.course_single_up_nav_arrow).setOnClickListener(new View.OnClickListener() {
@@ -66,12 +72,19 @@ public class CourseSingleActivity extends ActionBarActivity {
         author.setText(course.author.name);
         category.setText(course.category);
         date.setText(formatDate(course.date));
+        iconProgressBar.setVisibility(View.VISIBLE);
 
         // set rounded image
         Glide.with(getApplicationContext())
-                .load("http://www.reachnettings.com/wp-content/uploads/2014/02/placeholder-1024x640.png")
+                .load("http://loremflickr.com/144/144")
                 .centerCrop()
-                .into(icon);
+                .into(new GlideDrawableImageViewTarget(icon) {
+                    @Override
+                    public void onResourceReady(GlideDrawable drawable, GlideAnimation anim) {
+                        super.onResourceReady(drawable, anim);
+                        iconProgressBar.setVisibility(View.GONE);
+                    }
+                });
 
         // populate lessons programatically in LinearLayout
         addLessonsToLayout(course.lessons);

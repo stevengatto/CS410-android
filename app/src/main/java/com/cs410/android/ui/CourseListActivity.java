@@ -13,9 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.cs410.android.R;
 import com.cs410.android.model.Course;
 import com.cs410.android.util.AccountUtils;
@@ -92,29 +96,36 @@ public class CourseListActivity extends ActionBarActivity {
 
     private class CourseHolder extends RecyclerView.ViewHolder {
 
-        private TextView title, author, category, date;
+        private TextView title, author, description;
         private ImageView icon;
+        private ProgressBar iconProgressBar;
 
         public CourseHolder(View itemView) {
             super(itemView);
 
             title = (TextView) itemView.findViewById(R.id.item_course_list_title);
             author = (TextView) itemView.findViewById(R.id.item_course_list_author);
-            category = (TextView) itemView.findViewById(R.id.item_course_list_category);
-            date = (TextView) itemView.findViewById(R.id.item_course_list_date);
+            description = (TextView) itemView.findViewById(R.id.item_course_list_desc);
             icon = (ImageView) itemView.findViewById(R.id.item_course_list_icon);
+            iconProgressBar = (ProgressBar) itemView.findViewById(R.id.item_course_list_icon_progress);
         }
 
         private void bindCourse(Course course) {
             title.setText(course.title);
             author.setText(course.author.name);
-            category.setText(course.category);
-            date.setText(formatDate(course.date));
+            description.setText(course.description.length() > 0 ? " \u2015 " + course.description : "");
+            iconProgressBar.setVisibility(View.VISIBLE);
 
             Glide.with(getApplicationContext())
-                .load("http://www.reachnettings.com/wp-content/uploads/2014/02/placeholder-1024x640.png")
+                .load("http://loremflickr.com/144/144")
                 .centerCrop()
-                .into(icon);
+                .into(new GlideDrawableImageViewTarget(icon) {
+                    @Override
+                    public void onResourceReady(GlideDrawable drawable, GlideAnimation anim) {
+                        super.onResourceReady(drawable, anim);
+                        iconProgressBar.setVisibility(View.GONE);
+                    }
+                });
         }
 
         private String formatDate(String date) {

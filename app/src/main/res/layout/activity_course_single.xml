@@ -60,7 +60,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/single_course_author"
                                 android:layout_marginTop="2dp"
-                                android:text="Outdoors, Inside, Something Else"
                                 android:textSize="20sp" />
 
                             <TextView
@@ -68,7 +67,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/single_course_category"
-                                android:text="January 26, 2015"
                                 android:textSize="20sp" />
 
                             <View

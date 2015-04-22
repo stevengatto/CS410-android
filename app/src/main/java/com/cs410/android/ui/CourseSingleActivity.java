@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -20,7 +22,9 @@ import com.cs410.android.model.Lesson;
 import com.cs410.android.util.AccountUtils;
 import com.cs410.android.util.WebUtils;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.melnykov.fab.FloatingActionButton;
 import com.overthink.mechmaid.progress.ProgressableContentFrame;
+import com.overthink.mechmaid.util.Toaster;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,9 +48,11 @@ public class CourseSingleActivity extends ActionBarActivity {
     }
 
     private void initialize() {
+        // show progress dialog until the web request finishes
         contentFrame = (ProgressableContentFrame) findViewById(R.id.course_single_progress_content_frame);
         contentFrame.showProgress();
 
+        // find views
         title = (TextView) findViewById(R.id.single_course_title);
         author = (TextView) findViewById(R.id.single_course_author);
         category = (TextView) findViewById(R.id.single_course_category);
@@ -55,6 +61,7 @@ public class CourseSingleActivity extends ActionBarActivity {
         iconProgressBar = (ProgressBar) findViewById(R.id.single_course_icon_progress);
         lessonListParent = (LinearLayout) findViewById(R.id.single_course_lesson_list_parent);
 
+        // go back when up button is pressed
         findViewById(R.id.course_single_up_nav_arrow).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,6 +69,15 @@ public class CourseSingleActivity extends ActionBarActivity {
             }
         });
 
+        // set default onclick listener for floating favorite button
+        findViewById(R.id.course_single_favorite_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toaster.showToastFromString(getApplicationContext(), "Course favorited!");
+            }
+        });
+
+        // make web request to retrieve course information
         String courseId = getIntent().getExtras().getString("id");
         AccountUtils.getUnauthenticatedApiInterface().getCourse(courseId, new CourseSingleCallback(this));
     }
@@ -100,15 +116,38 @@ public class CourseSingleActivity extends ActionBarActivity {
 
     private void addLessonsToLayout(List<Lesson> lessons) {
         for (int i=0; i<lessons.size(); i++) {
-            TextView lessonTextView = new TextView(this);
-            lessonTextView.setText("Lesson " + i + ": " + lessons.get(i).title);
-            lessonTextView.setPadding(0, 4, 0, 0);
-            lessonTextView.setTextSize(20);
-            lessonListParent.addView(lessonTextView);
+            View listItem = getLayoutInflater().inflate(R.layout.item_lesson_list, null);
+            listItem.setTag(lessons.get(i)); // set lesson object as tag so we can access id later
+
+            // set on click listener for later
+            listItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toaster.showToastFromString(getApplicationContext(), ((Lesson) v.getTag()).title);
+                }
+            });
+
+            if (i == 0) {
+                // remove top vertical line
+                listItem.findViewById(R.id.lesson_list_progress_circle_top_line).setVisibility(View.INVISIBLE);
+            } else if (i == lessons.size() - 1) {
+                // remove bottom vertical line and extra divider at the end
+                listItem.findViewById(R.id.lesson_list_progress_circle_bottom_line).setVisibility(View.INVISIBLE);
+                ((RelativeLayout) listItem.findViewById(R.id.lesson_list_bottom_frame))
+                        .removeView(listItem.findViewById(R.id.lesson_list_divider));
+            }
+            // set background to green circle drawable
+            listItem.findViewById(R.id.lesson_list_progress_circle)
+                    .setBackground(getResources().getDrawable(R.drawable.circle_green));
+            // set titles
+            ((TextView) listItem.findViewById(R.id.lesson_list_title))
+                    .setText(i + 1 + ". " + lessons.get(i).title);
+            // add lesson item to parent view
+            lessonListParent.addView(listItem);
         }
-        lessonListParent.invalidate();
     }
 
+    // create mock lesson data for testing
     private List<Lesson> getTestLessonsData() {
         List<Lesson> list = new ArrayList<>();
         list.add(new Lesson("1", "Buying coffee from the store"));
@@ -124,6 +163,9 @@ public class CourseSingleActivity extends ActionBarActivity {
         return list;
     }
 
+    /**
+     * Callback class for Course retrieving web request
+     */
     private class CourseSingleCallback extends WebUtils.RetroCallback<Course> {
         public CourseSingleCallback(Context context) {
             super(context);

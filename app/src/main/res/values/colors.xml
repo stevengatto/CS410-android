@@ -15,4 +15,10 @@
     <color name="refresh_spinner_2">@android:color/darker_gray</color>
     <color name="refresh_spinner_3">@color/brand</color>
     <color name="refresh_spinner_4">@android:color/darker_gray</color>
+
+    <color name="primary_text">#222</color>
+    <color name="secondary_text">#777</color>
+
+    <color name="circle_red">#D93027</color>
+    <color name="circle_green">#24B017</color>
 </resources>

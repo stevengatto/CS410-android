@@ -35,7 +35,7 @@ import retrofit.client.Response;
  *
  * Created by user on 2/25/2015.
  */
-public class CourseListActivity extends ActionBarActivity {
+public class CourseListActivity extends NavigationDrawerActivity {
 
     private RecyclerView recyclerView;
     private ProgressableContentFrame contentFrame;
@@ -71,7 +71,11 @@ public class CourseListActivity extends ActionBarActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         setSupportActionBar((Toolbar) findViewById(R.id.course_list_toolbar));
-        getSupportActionBar().setTitle("Course List");
+        getSupportActionBar().setTitle("Discover");
+
+        // Enable the navigation drawer icon
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         AccountUtils.getUnauthenticatedApiInterface().getCourseList(new CourseListCallback(this));
     }
@@ -126,14 +130,6 @@ public class CourseListActivity extends ActionBarActivity {
                         iconProgressBar.setVisibility(View.GONE);
                     }
                 });
-        }
-
-        private String formatDate(String date) {
-            String[] months = {"January", "February", "March", "April", "May", "June", "July",
-                "August", "September", "October", "November", "December" };
-            String[] split = date.split("-");
-            return months[Integer.parseInt(split[1].trim())] + " " + split[2].split("T")[0] +
-                    ", " + split[0];
         }
     }
 

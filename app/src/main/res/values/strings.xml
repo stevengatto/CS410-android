@@ -17,4 +17,6 @@
     <string name="validation_email_format">Incorrect email</string>
     <string name="validation_password_min_len">Password must be at least 8 characters</string>
 
+    <string name="drawer_open">Navigation drawer open</string>
+    <string name="drawer_close">Navigation drawer closed</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.cs410.android.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -115,10 +116,10 @@ public class NavigationDrawerActivity extends ActionBarActivity implements View.
                         Toaster.showToastFromString(context, "My Courses");
                         break;
                     case R.id.nav_drawer_discover:
-                        Toaster.showToastFromString(context, "Discover");
+                        startActivity(new Intent(context, CourseListActivity.class));
                         break;
                     case R.id.nav_drawer_profile:
-                        Toaster.showToastFromString(context, "Profile");
+                        startActivity(new Intent(context, ProfileActivity.class));
                         break;
                 }
             }

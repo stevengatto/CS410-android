@@ -38,7 +38,13 @@
         <activity
             android:name=".ui.CourseSingleActivity"
             android:label="@string/title_activity_course_single"
-            android:parentActivityName="com.cs410.android.ui.CourseListActivity" >
+            android:parentActivityName=".ui.CourseListActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ui.ProfileActivity"
+            android:label="@string/title_activity_profile"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

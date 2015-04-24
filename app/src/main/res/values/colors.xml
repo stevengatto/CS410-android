@@ -4,7 +4,7 @@
     <color name="brand">@color/action_bar</color>
 
     <color name="poll_list_background">#EFEFEF</color>
-    <color name="divider">#20ffffff</color>
+    <color name="divider">#12000000</color>
     <color name="text_color">#606060</color>
     <color name="bg_peach">#F69E90</color>
     <color name="bg_button">#FB8471</color>
@@ -16,8 +16,9 @@
     <color name="refresh_spinner_3">@color/brand</color>
     <color name="refresh_spinner_4">@android:color/darker_gray</color>
 
-    <color name="primary_text">#222</color>
-    <color name="secondary_text">#777</color>
+    <color name="primary_text">#87000000</color>
+    <color name="secondary_text">#54000000</color>
+    <color name="hint_text">#26000000</color>
 
     <color name="circle_red">#D93027</color>
     <color name="circle_green">#24B017</color>

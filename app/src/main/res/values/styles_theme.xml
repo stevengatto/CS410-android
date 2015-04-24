@@ -19,6 +19,14 @@
         <item name="icon">@android:color/transparent</item> <!-- Support library compatibility -->
     </style>
 
+    <style name="ActionBarAppTheme.Overlay" parent="ActionBarAppTheme">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item> <!-- Support library compatibility -->
+
+        <item name="android:background">@android:color/transparent</item>
+        <item name="background">@android:color/transparent</item> <!-- Support library compatibility -->
+    </style>
+
     <!-- Action Bar Popup (off screen options) -->
     <style name="ActionBarPopupAppTheme" parent="@style/ThemeOverlay.AppCompat.Light">
         <item name="android:background">@android:color/white</item>

@@ -1,7 +1,7 @@
 package com.cs410.android.ui;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -14,6 +14,9 @@ public class ProfileActivity extends NavigationDrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        setSupportActionBar((Toolbar)findViewById(R.id.profile_toolbar));
+        getSupportActionBar().setTitle("");
     }
 
 

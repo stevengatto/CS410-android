@@ -1,31 +1,22 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/profile_toolbar_header_frame"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.cs410.android.ui.ProfileActivity">
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <include
-            layout="@layout/view_profile_scroll_header" />
-
-        <include
-            layout="@layout/view_profile_toolbar"/>
-
-    </FrameLayout>
+    android:layout_height="wrap_content">
 
     <ScrollView
+        android:id="@+id/profile_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/profile_scroll_view_contents"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/profile_header_height"/>
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
@@ -43,23 +34,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingStart="8dp"
-                        android:textSize="18sp"
+                        android:text="EMAIL"
                         android:textColor="@color/primary_text"
-                        android:text="EMAIL"/>
+                        android:textSize="18sp" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="4dp"
                         android:layout_marginBottom="8dp"
-                        android:background="@color/divider"/>
+                        android:layout_marginTop="4dp"
+                        android:background="@color/divider" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
+                        android:text="steven57146@aim.com"
                         android:textColor="@color/secondary_text"
-                        android:text="steven57146@aim.com" />
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
@@ -81,22 +72,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingStart="8dp"
-                        android:textSize="18sp"
+                        android:text="ENROLLED COURSES"
                         android:textColor="@color/primary_text"
-                        android:text="ENROLLED COURSES"/>
+                        android:textSize="18sp" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="4dp"
                         android:layout_marginBottom="8dp"
-                        android:background="@color/divider"/>
+                        android:layout_marginTop="4dp"
+                        android:background="@color/divider" />
 
                     <!-- Will be filled programmatically with list of courses -->
                     <LinearLayout
+                        android:id="@+id/profile_courses_parent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"/>
+                        android:orientation="vertical" />
 
                 </LinearLayout>
 
@@ -104,8 +96,14 @@
 
         </LinearLayout>
 
-
-
     </ScrollView>
 
-</LinearLayout>
+    <include
+        android:id="@+id/profile_header_layout"
+        layout="@layout/view_profile_scroll_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <include layout="@layout/view_profile_toolbar" />
+
+</FrameLayout>

@@ -5,4 +5,7 @@
 
     <!-- Shadows -->
     <dimen name="shadow_thickness">5dp</dimen>
+
+    <dimen name="profile_header_height">221dp</dimen>
+    <dimen name="profile_toolbar_height">56dp</dimen>
 </resources>

@@ -62,11 +62,10 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/single_course_icon_frame"
             android:layout_below="@+id/course_single_up_nav_arrow"
+            android:singleLine="true"
             android:ellipsize="marquee"
-            android:maxLines="1"
             android:paddingTop="18dp"
             android:paddingBottom="18dp"
-            android:paddingEnd="12dp"
             android:paddingStart="12dp"
             android:textColor="@android:color/white"
             android:textSize="28sp" />

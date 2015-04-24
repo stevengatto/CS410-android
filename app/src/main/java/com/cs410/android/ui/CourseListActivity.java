@@ -103,6 +103,7 @@ public class CourseListActivity extends NavigationDrawerActivity {
         private TextView title, author, description;
         private ImageView icon;
         private ProgressBar iconProgressBar;
+        private View divider;
 
         public CourseHolder(View itemView) {
             super(itemView);
@@ -112,13 +113,20 @@ public class CourseListActivity extends NavigationDrawerActivity {
             description = (TextView) itemView.findViewById(R.id.item_course_list_desc);
             icon = (ImageView) itemView.findViewById(R.id.item_course_list_icon);
             iconProgressBar = (ProgressBar) itemView.findViewById(R.id.item_course_list_icon_progress);
+            divider = (View) itemView.findViewById(R.id.item_course_list_divider);
         }
 
-        private void bindCourse(Course course) {
+        private void bindCourse(Course course, boolean isLastCourse) {
             title.setText(course.title);
             author.setText(course.author.name);
             description.setText(course.description.length() > 0 ? " \u2015 " + course.description : "");
             iconProgressBar.setVisibility(View.VISIBLE);
+
+            if (isLastCourse) {
+                divider.setVisibility(View.INVISIBLE);
+            } else {
+                divider.setVisibility(View.VISIBLE);
+            }
 
             Glide.with(getApplicationContext())
                 .load("http://loremflickr.com/144/144")
@@ -163,7 +171,8 @@ public class CourseListActivity extends NavigationDrawerActivity {
         @Override
         public void onBindViewHolder(CourseHolder courseHolder, int i) {
             Course currentCourse = courseList.get(i);
-            courseHolder.bindCourse(currentCourse);
+            boolean isLastCourse = (i == courseList.size() - 1);
+            courseHolder.bindCourse(currentCourse, isLastCourse);
         }
 
         @Override

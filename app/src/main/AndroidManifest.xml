@@ -15,12 +15,16 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/FastReaches.Theme" >
-        <activity android:name=".ui.SignInActivity"/>
-        <activity android:name=".ui.SignUpActivity" />
-        <activity android:name=".ui.CourseListActivity" >
+        android:theme="@style/FastReaches.Theme">
+        <activity android:name=".ui.SignInActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.SignUpActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.CourseListActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

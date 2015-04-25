@@ -65,7 +65,7 @@ public class CourseSingleActivity extends ActionBarActivity {
         findViewById(R.id.course_single_up_nav_arrow).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                finish();
             }
         });
 

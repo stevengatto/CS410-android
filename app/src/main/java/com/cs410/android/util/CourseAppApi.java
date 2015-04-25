@@ -59,4 +59,12 @@ public interface CourseAppApi {
      */
     @GET("/courses/{id}")
     void getCourse(@Path("id") String id, Callback<Course> callback);
+
+    /**
+     * GET request to retrieve profile data
+     *
+     * @param callback callback method to execute when the GET request finishes
+     */
+    @GET("/users/me")
+    void getProfile(Callback<User> callback);
 }

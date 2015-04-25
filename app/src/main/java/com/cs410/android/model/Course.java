@@ -14,6 +14,13 @@ public class Course {
     public String date;
     public String category;
     public List<Lesson> lessons;
+
+    // Constructor used for creating mock data
+    public Course(Author author, String title, String description) {
+        this.author = author;
+        this.title = title;
+        this.description = description;
+    }
 }
 
 

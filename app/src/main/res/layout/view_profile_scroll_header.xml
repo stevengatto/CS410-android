@@ -10,27 +10,41 @@
         android:layout_height="216dp"
         android:background="@color/brand">
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/profile_header_image"
+        <FrameLayout
+            android:id="@+id/profile_header_image_frame"
             android:layout_width="144dp"
             android:layout_height="144dp"
-            android:layout_centerHorizontal="true"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="16dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_app"
-            app:riv_border_color="@android:color/white"
-            app:riv_border_width="2dp"
-            app:riv_oval="true" />
+            android:layout_centerHorizontal="true">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/profile_header_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:riv_border_color="@android:color/white"
+                app:riv_border_width="2dp"
+                app:riv_oval="true" />
+
+            <ProgressBar
+                android:id="@+id/profile_header_image_progress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp"/>
+
+        </FrameLayout>
 
         <TextView
             android:id="@+id/profile_header_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/profile_header_image"
+            android:layout_below="@id/profile_header_image_frame"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="16dp"
-            android:text="Steven Gatto"
+            android:paddingStart="56dp"
+            android:paddingEnd="56dp"
+            android:singleLine="true"
+            android:ellipsize="marquee"
             android:textColor="@android:color/white"
             android:textSize="28dp" />
 

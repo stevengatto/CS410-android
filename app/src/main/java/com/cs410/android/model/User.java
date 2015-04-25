@@ -1,12 +1,15 @@
 package com.cs410.android.model;
 
+import java.util.List;
+
 /**
  * Created by steven on 2/25/15.
  */
 public class User {
-    String name;
-    String email;
-    String password;
+    public String name;
+    public String email;
+    public String password;
+    public List<Course> enrolledCourses;
 
     public User(String email, String password) {
         this(null, email, password);

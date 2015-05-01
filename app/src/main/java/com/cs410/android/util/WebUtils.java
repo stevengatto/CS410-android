@@ -48,8 +48,12 @@ public class WebUtils {
         public void failure(RetrofitError retrofitError) {
             switch(retrofitError.getKind()) {
                 case HTTP:
-                    currentToast = Toaster.showToastFromString(context, "Error: "
-                            + retrofitError.getResponse().getStatus());
+                    if (retrofitError.getResponse().getStatus() == 401) {
+                        currentToast = Toaster.showToastFromString(context, "Authorization Expired");
+                    } else {
+                        currentToast = Toaster.showToastFromString(context, "Error: "
+                                + retrofitError.getResponse().getStatus());
+                    }
                     break;
                 case CONVERSION:
                     currentToast = Toaster.showToastFromString(context, "Conversion Error");

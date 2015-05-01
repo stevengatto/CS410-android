@@ -31,7 +31,6 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/profile_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingStart="8dp"
@@ -47,9 +46,10 @@
                         android:background="@color/divider" />
 
                     <TextView
+                        android:id="@+id/profile_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="steven57146@aim.com"
+                        android:text=""
                         android:textColor="@color/secondary_text"
                         android:textSize="18sp" />
 

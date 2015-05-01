@@ -15,13 +15,16 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/FastReaches.Theme">
-        <activity android:name=".ui.SignInActivity"
+        android:theme="@style/FastReaches.Theme" >
+        <activity
+            android:name=".ui.SignInActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.SignUpActivity"
+        <activity
+            android:name=".ui.SignUpActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.CourseListActivity"
-            android:screenOrientation="portrait">
+        <activity
+            android:name=".ui.CourseListActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,11 +46,15 @@
             android:name=".ui.CourseSingleActivity"
             android:label="@string/title_activity_course_single"
             android:parentActivityName=".ui.CourseListActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".ui.ProfileActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ui.LessonSingleActivity"
+            android:label="@string/title_activity_lesson_single" >
         </activity>
     </application>
 

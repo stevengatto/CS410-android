@@ -73,7 +73,7 @@ public class SignUpActivity extends Activity {
         password = txtPassword.getText().toString();
 
         User user = new User(name, email, password);
-        CourseAppApi api = AccountUtils.getUnauthenticatedAuthInterface();
+        CourseAppApi api = AccountUtils.getUnauthenticatedApiInterface();
         api.signUp(user, new SignUpCallback(this));
     }
 

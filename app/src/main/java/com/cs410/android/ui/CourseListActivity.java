@@ -2,9 +2,9 @@ package com.cs410.android.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -158,6 +158,11 @@ public class CourseListActivity extends NavigationDrawerActivity {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // change background color
+                    v.setBackgroundColor(Color.LTGRAY);
+                    // change back in 100 ms
+                    new Thread(new ViewClickRunnable(v)).start();
+                    // start course activity
                     int position = recyclerView.getChildPosition(v);
                     String courseId = courseList.get(position)._id;
                     Intent activityIntent = new Intent(viewGroup.getContext(), CourseSingleActivity.class);
@@ -194,6 +199,34 @@ public class CourseListActivity extends NavigationDrawerActivity {
         public void success(List<Course> courses, Response response) {
             contentFrame.showContent();
             recyclerView.setAdapter((adapter = new CourseListAdapter(courses)));
+        }
+    }
+
+    /**
+     * Runnable to sleep and then change the view color back to transparent
+     */
+    private class ViewClickRunnable implements Runnable {
+        View view;
+
+        public ViewClickRunnable(View view) {
+            this.view = view;
+        }
+
+        @Override
+        public void run() {
+            // wait 20 ms
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                // do nothing
+            }
+            // make list item transparent again
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    view.setBackgroundColor(Color.TRANSPARENT);
+                }
+            });
         }
     }
 }

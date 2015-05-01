@@ -1,9 +1,11 @@
 package com.cs410.android.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,11 +40,11 @@ public class CourseSingleActivity extends ActionBarActivity {
     private LinearLayout lessonListParent;
     private ProgressableContentFrame contentFrame;
     private ProgressBar iconProgressBar;
+    private String courseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_course_single);
         initialize();
     }
@@ -78,7 +80,7 @@ public class CourseSingleActivity extends ActionBarActivity {
         });
 
         // make web request to retrieve course information
-        String courseId = getIntent().getExtras().getString("id");
+        courseId = getIntent().getExtras().getString("id");
         AccountUtils.getUnauthenticatedApiInterface().getCourse(courseId, new CourseSingleCallback(this));
     }
 
@@ -123,7 +125,12 @@ public class CourseSingleActivity extends ActionBarActivity {
             listItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toaster.showToastFromString(getApplicationContext(), ((Lesson) v.getTag()).title);
+                    String lessonId = ((Lesson)v.getTag())._id;
+                    Intent intent = new Intent(getApplicationContext(), LessonSingleActivity.class);
+                    intent.putExtra("lessonId", lessonId);
+                    intent.putExtra("courseId", courseId);
+                    startActivity(intent);
+//                    finish();
                 }
             });
 

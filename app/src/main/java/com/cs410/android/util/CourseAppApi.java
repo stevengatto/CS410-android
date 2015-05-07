@@ -1,6 +1,7 @@
 package com.cs410.android.util;
 
 import com.cs410.android.model.Course;
+import com.cs410.android.model.Lesson;
 import com.cs410.android.model.SigninResponse;
 import com.cs410.android.model.User;
 
@@ -67,4 +68,15 @@ public interface CourseAppApi {
      */
     @GET("/users/me")
     void getProfile(Callback<User> callback);
+
+    /**
+     * GET request to retrieve lesson data
+     *
+     * @param courseId course id
+     * @param lessonId lesson id
+     * @param callback callback method to execute when the GET request finishes
+     */
+    @GET("/courses/{courseId}/lessons/{lessonId}")
+    void getLesson(@Path("courseId") String courseId, @Path("lessonId") String lessonId,
+                   Callback<Lesson> callback);
 }

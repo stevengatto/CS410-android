@@ -117,7 +117,7 @@ public class CourseSingleActivity extends ActionBarActivity {
     }
 
     private void addLessonsToLayout(List<Lesson> lessons) {
-        for (int i=0; i<lessons.size(); i++) {
+        for (int i=0; lessons != null && i<lessons.size(); i++) {
             View listItem = getLayoutInflater().inflate(R.layout.item_lesson_list, null);
             listItem.setTag(lessons.get(i)); // set lesson object as tag so we can access id later
 
@@ -163,20 +163,20 @@ public class CourseSingleActivity extends ActionBarActivity {
     }
 
     // create mock lesson data for testing
-    private List<Lesson> getTestLessonsData() {
-        List<Lesson> list = new ArrayList<>();
-        list.add(new Lesson("1", "Buying coffee from the store"));
-        list.add(new Lesson("2", "Putting the coffee into the car"));
-        list.add(new Lesson("3", "Opening the coffee bag safely"));
-        list.add(new Lesson("4", "Measuring the perfect amount of coffee grounds"));
-        list.add(new Lesson("4", "Measuring just enough water"));
-        list.add(new Lesson("5", "Turning on the coffee maker"));
-        list.add(new Lesson("6", "Watching the coffee brew"));
-        list.add(new Lesson("7", "Adding cream and sugar to taste"));
-        list.add(new Lesson("8", "Offering your fresh coffee to a good friend"));
-        list.add(new Lesson("9", "Enjoying your freshly brewed cup of joe"));
-        return list;
-    }
+//    private List<Lesson> getTestLessonsData() {
+//        List<Lesson> list = new ArrayList<>();
+//        list.add(new Lesson("1", "Buying coffee from the store"));
+//        list.add(new Lesson("2", "Putting the coffee into the car"));
+//        list.add(new Lesson("3", "Opening the coffee bag safely"));
+//        list.add(new Lesson("4", "Measuring the perfect amount of coffee grounds"));
+//        list.add(new Lesson("4", "Measuring just enough water"));
+//        list.add(new Lesson("5", "Turning on the coffee maker"));
+//        list.add(new Lesson("6", "Watching the coffee brew"));
+//        list.add(new Lesson("7", "Adding cream and sugar to taste"));
+//        list.add(new Lesson("8", "Offering your fresh coffee to a good friend"));
+//        list.add(new Lesson("9", "Enjoying your freshly brewed cup of joe"));
+//        return list;
+//    }
 
     /**
      * Callback class for Course retrieving web request
@@ -189,7 +189,7 @@ public class CourseSingleActivity extends ActionBarActivity {
         @Override
         public void success(Course course, Response response) {
             contentFrame.showContent();
-            course.lessons = getTestLessonsData();
+//            course.lessons = getTestLessonsData();
             setDataInViews(course);
         }
     }

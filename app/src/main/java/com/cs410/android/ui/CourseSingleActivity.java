@@ -94,7 +94,7 @@ public class CourseSingleActivity extends ActionBarActivity {
 
         // set rounded image
         Glide.with(getApplicationContext())
-                .load("http://loremflickr.com/144/144")
+                .load("http://lorempixel.com/200/200/")
                 .centerCrop()
                 .into(new GlideDrawableImageViewTarget(icon) {
                     @Override
@@ -143,9 +143,17 @@ public class CourseSingleActivity extends ActionBarActivity {
                 ((RelativeLayout) listItem.findViewById(R.id.lesson_list_bottom_frame))
                         .removeView(listItem.findViewById(R.id.lesson_list_divider));
             }
-            // set background to green circle drawable
-            listItem.findViewById(R.id.lesson_list_progress_circle)
-                    .setBackground(getResources().getDrawable(R.drawable.circle_green));
+            if (i<=2) {
+                // set background to green circle drawable
+                listItem.findViewById(R.id.lesson_list_progress_circle)
+                        .setBackground(getResources().getDrawable(R.drawable.circle_green));
+            }
+            else {
+
+                // set background to red circle drawable
+                listItem.findViewById(R.id.lesson_list_progress_circle)
+                        .setBackground(getResources().getDrawable(R.drawable.circle_red));
+            }
             // set titles
             ((TextView) listItem.findViewById(R.id.lesson_list_title))
                     .setText(i + 1 + ". " + lessons.get(i).title);

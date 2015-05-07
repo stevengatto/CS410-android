@@ -117,7 +117,7 @@ public class ProfileActivity extends NavigationDrawerActivity implements
 
         // set rounded image
         Glide.with(getApplicationContext())
-                .load("http://loremflickr.com/144/144")
+                .load("http://lorempixel.com/200/200/people/")
                 .centerCrop()
                 .into(new GlideDrawableImageViewTarget(image) {
                     @Override
@@ -140,6 +140,10 @@ public class ProfileActivity extends NavigationDrawerActivity implements
                     .setImageResource(R.drawable.ic_launcher);
             courseListItem.findViewById(R.id.item_course_list_icon_progress)
                     .setVisibility(View.INVISIBLE);
+            Glide.with(getApplicationContext())
+                    .load("http://lorempixel.com/200/200/")
+                    .centerCrop()
+                    .into((ImageView)courseListItem.findViewById(R.id.item_course_list_icon));
             enrolledCoursesParent.addView(courseListItem);
         }
     }

@@ -129,7 +129,7 @@ public class CourseListActivity extends NavigationDrawerActivity {
             }
 
             Glide.with(getApplicationContext())
-                .load("http://loremflickr.com/144/144")
+                .load("http://lorempixel.com/200/200/")
                 .centerCrop()
                 .into(new GlideDrawableImageViewTarget(icon) {
                     @Override
